@@ -1,0 +1,17 @@
+/* ボタン */
+.btn-sm {
+    padding: 3px 0px;
+    max-width: 30px;
+    min-width: 30px;
+    border-radius: 0px;
+    position: relative;
+}
+
+/* 依頼回数 */
+.request-count {
+    font-size: 8pt;
+    display: inline-block;
+    position: absolute;
+    bottom: -1px;
+    right: 2px;
+}

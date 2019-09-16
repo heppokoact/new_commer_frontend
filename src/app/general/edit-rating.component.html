@@ -1,0 +1,21 @@
+<!-- 採点依頼用モーダル -->
+<div bsModal #editRatingModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">【{{unit?.majorName}}】{{unit?.minorName}}</h4>
+        <button type="button" class="close pull-right" (click)="editRatingModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <button class="rating-button btn btn-success"
+          (click)="request()"
+          [disabled]="!util.canRequestAgain(rating)">採点依頼</button><br/>
+        <button class="rating-button btn btn-secondary"
+          (click)="decline()"
+          [disabled]="!util.canDecline(rating)">取り下げ</button><br/>
+      </div>
+    </div>
+  </div>
+</div>

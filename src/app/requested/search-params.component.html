@@ -1,0 +1,116 @@
+<!-- 講師用採点依頼編集画面 -->
+<!-- ngx-bootstrapのMODALを使用している -->
+<div bsModal #searchParamsModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">抽出条件設定画面</h4>
+        <button type="button" class="close pull-right" (click)="searchParamsModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            <label>提出者</label>
+            <select class="form-control"
+                [(ngModel)]="params.requesterNo">
+                <option></option>
+                <option *ngFor="let newCommer of newCommers"
+                    [value]="newCommer.no">
+                    {{newCommer.no + ' ' + newCommer.name}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>単元名</label>
+            <select class="form-control"
+                [(ngModel)]="params.majorName"
+                (change)="changeMajor()">
+                <option></option>
+                <option *ngFor="let major of majors">
+                    {{major.name}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>章名</label>
+            <select class="form-control"
+                [(ngModel)]="params.minorName">
+                <option></option>
+                <option *ngFor="let minor of minors">
+                    {{minor.minorName}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>採点者</label>
+            <select class="form-control"
+                [(ngModel)]="this.params.raterNo">
+                <option></option>
+                <option *ngFor="let instructor of instructors"
+                    [value]="instructor.no">
+                    {{instructor.name}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>ステータス</label><br/>
+            <div class="status-button-group">
+                <ng-container *ngFor="let status of statuses">
+                    <button *ngIf="status.id != RatingStatus.NONE && status.id != RatingStatus.DELETED"
+                        class="btn btn-{{isSelectedStatus(status.id) ? status.style : 'default'}} status-button" 
+                        (click)="changeStatus(status.id)">
+                        {{status.name}}
+                    </button>
+                </ng-container>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>提出日時(時分まで入力しないと無効、Chrome,Edge以外はyyyy-MM-dd hh:mmで入力)</label>
+            <div class="form-inline">
+                <input type="datetime-local" 
+                    class="form-control" 
+                    [ngModel]="params.requestDtFrom"
+                    (ngModelChange)="params.requestDtFrom = $event" /> ～ 
+                <input type="datetime-local" 
+                    class="form-control" 
+                    [ngModel]="params.requestDtTo"
+                    (ngModelChange)="params.requestDtTo = $event" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>採点日時(時分まで入力しないと無効、Chrome,Edge以外はyyyy-MM-dd hh:mmで入力)</label>
+            <div class="form-inline">
+                <input type="datetime-local" 
+                    class="form-control" 
+                    [ngModel]="params.completeDtFrom"
+                    (ngModelChange)="params.completeDtFrom = $event" /> ～ 
+                <input type="datetime-local" 
+                    class="form-control" 
+                    [ngModel]="params.completeDtTo"
+                    (ngModelChange)="params.completeDtTo = $event" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>並び順</label>
+            <div class="form-inline">
+                <select *ngFor="let index of [0, 1, 2]"
+                    class="form-control"
+                    [(ngModel)]="selectedOrders[index]"
+                    (change)="changeOrder()">
+                    <option></option>
+                    <option *ngFor="let order of orders" 
+                        [value]="order.value">
+                        {{order.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-info pull-right"
+            (click)="configure()">設定</button>
+        <!-- ボタンの高さが無視されてモーダル外にはみ出る対策のためのダミー -->
+        <button class="btn" style="visibility: hidden">設定</button>
+      </div>
+    </div>
+  </div>
+</div> 

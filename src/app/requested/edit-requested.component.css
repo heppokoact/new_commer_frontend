@@ -1,0 +1,31 @@
+/* 採点ステータスボタン */
+.status-button {
+    width: 5em;
+    margin-left: 5px;
+}
+
+/** 現在の採点ステータスのボタン */
+.current-status-button {
+    margin-left: 0;
+    margin-right: 5px;
+}
+
+/** 採点ステータスボタンの注釈 */
+.status-annotation {
+    margin-top: 5px;
+}
+
+/** YP */
+.yp {
+    margin: 0 7px;
+}
+
+/** YPのテキストエリア */
+.yp-textarea {
+    margin-top: 10px;
+}
+
+/* YPの注釈 */
+.yp-annotation {
+    margin-left: 15px;
+}

@@ -1,0 +1,17 @@
+<!-- メッセージ通知用モーダル -->
+<!-- ngx-bootstrapのMODALを使用している -->
+<div bsModal #messageModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{title}}</h4>
+        <button type="button" class="close pull-right" (click)="messageModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{body}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<!-- 採点依頼用モーダル -->
+<!-- ngx-bootstrapのMODALを使用している -->
+<div bsModal #generalConfigModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">設定</h4>
+        <button type="button" class="close pull-right" (click)="generalConfigModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>表示する単元</h5>
+        <div class="btn-group-vertical" role="group">
+          <ng-container *ngFor="let major of majors">
+            <button class="btn btn-{{majorDisplay[major.name] ? 'success' : 'secondary'}}"
+              (click)="toggleMajorDisplay(major.name)">{{major.name}}</button>
+          </ng-container>
+        </div>
+        <hr/>
+        <div>
+          <button class="btn btn-info pull-right"
+              (click)="apply()">適用</button>
+          <!-- ボタンの高さが無視されてモーダル外にはみ出る対策のためのダミー -->
+          <button class="btn" style="visibility: hidden">適用</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

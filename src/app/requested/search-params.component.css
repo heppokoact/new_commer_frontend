@@ -1,0 +1,6 @@
+/* 採点ステータスボタン */
+.status-button {
+    width: 5em;
+    margin-left: 0;
+    margin-right: 5px;
+}

@@ -1,0 +1,34 @@
+/* コマンドボタンを、その領域は残しつつ非表示にする */
+.button-hidden {
+    visibility: hidden;
+}
+
+/* ステータス列にアイコンを自由に配置するための親コンテナ */
+.status-container {
+    position: relative;
+}
+
+/* メモ有無のアイコン */
+.has-memo {
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 43px;
+    color: #337ab7;
+}
+
+/* YPメモ有無のアイコン */
+.has-ypmemo {
+    display: block;
+    position: absolute;
+    top: 18px;
+    left: 43px;
+    color: #d9534f;
+}
+
+/* 抽出条件ボタン */
+.search-button {
+    position: absolute;
+    top: 50px;
+    right: 5px;
+}

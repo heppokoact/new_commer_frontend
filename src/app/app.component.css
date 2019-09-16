@@ -1,0 +1,25 @@
+html, body{
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+a.active {
+  background-color: gray;
+}
+
+/** ナビゲーションバーのボタン */
+.navbar-nav > li > a, .navbar-brand {
+    padding-top:4px !important; 
+    padding-bottom:0 !important;
+    height: 28px;
+}
+/** ナビゲーションバー */
+.navbar {
+  min-height:44px !important;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.dark-link, .dark-link:visited, .dark-link:active, .dark-link:hover {
+  color: #333;
+}

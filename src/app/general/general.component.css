@@ -1,0 +1,46 @@
+/* 採点依頼を表示するテーブル */
+.general-table {
+    table-layout: fixed;
+}
+
+/* テーブルのセル */
+.general-table th,
+.general-table td {
+    border: solid 1px #888888;
+    text-align: center;
+}
+
+/* テーブルのヘッダーセル */
+.general-table .minor-header th {
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 1em;
+    vertical-align: top;
+    text-align: center;
+}
+
+/* テーブルの縦書き部分 */
+.writing-mode-vertical {
+    -webkit-writing-mode: vertical-rl;
+    -ms-writing-mode: tb-lr;
+    writing-mode: vertical-rl;
+    -webkit-text-orientation: upright;
+    text-orientation: upright;
+    height: 300px;
+}
+
+/* YPのセル */
+.yp-cell {
+    min-width: 29px;
+}
+
+/* テーブルヘッダーの上揃えしたくないセル */
+.general-table .minor-header th.minor-header-othres {
+    vertical-align: middle;
+}
+
+/* 設定ボタン */
+.config-button {
+    width: 100%;
+    margin: 0;
+}

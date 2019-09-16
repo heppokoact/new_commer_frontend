@@ -1,0 +1,94 @@
+<edit-requested></edit-requested>
+<search-params></search-params>
+
+<button class="btn btn-defalut search-button"
+    (click)="showSearchParams()">抽出条件</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width: 7em;">社員番号</th>
+            <th style="width: 9em;">社員名</th>
+            <th style="width: 50em;">単元・章</th>
+            <th style="width: 10em;">提出日時</th>
+            <th style="width: 7em;">提出回数</th>
+            <th style="width: 7em;">ステータス</th>
+            <th style="width: 9em;">採点者</th>
+            <th style="width: 20em; min-width: 21em;">コマンド</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- [class.active]="isInactive(rating)"はおかしくみえるけど正常、背景色を変えたいだけ -->
+        <tr *ngFor="let rating of ratings"
+            [class.warning]="util.isRating(rating) && rating.raterNo == user.no"
+            [class.active]="isInactive(rating)">
+            <td>
+                <a routerLink="/requested"
+                    class="dark-link"
+                    [queryParams]="util.buildNewCommerParams(rating.requesterNo)">
+                    {{rating.requesterNo}}
+                </a>
+            </td>
+            <td>
+                <a routerLink="/requested"
+                    class="dark-link"
+                    [queryParams]="util.buildNewCommerParams(rating.requesterNo)">
+                    {{rating.requesterName}}
+                </a>
+            </td>
+            <td>
+                <a routerLink="/requested"
+                    class="dark-link"
+                    [queryParams]="util.buildUnitParams(rating.majorName, rating.minorName)">
+                    {{rating.majorName + ' ' + rating.minorName}}
+                </a>
+            </td>
+            <td>{{rating.requestDt}}</td>
+            <td>{{rating.requestCount}}</td>
+            <td>
+                <div class="status-container">
+                    <ng-container *ngFor="let status of statuses">
+                        <button *ngIf="status.id == rating.statusId"
+                            class="btn btn-{{status.style}}" 
+                            [disabled]="true">{{status.shortName}}</button>
+                    </ng-container>
+                    <!-- メモの有無 -->
+                    <span *ngIf="rating.memo"
+                        class="glyphicon glyphicon-ok-circle has-memo" 
+                        aria-hidden="true"></span>
+                    <!-- YPメモの有無 -->
+                    <span *ngIf="rating.ypMemo"
+                        class="glyphicon glyphicon-remove-circle has-ypmemo" 
+                        aria-hidden="true"></span>
+                </div>
+            </td>
+            <td>
+                <a routerLink="/requested"
+                    class="dark-link"
+                    [queryParams]="util.buildInstructorParams(rating.raterNo)">
+                    {{rating.raterName}}
+                </a>
+            </td>
+            <td>
+                <button class="btn btn-success"
+                    [class.button-hidden]="!util.canRequest(rating)"
+                    (click)="request(rating)">待</button>
+                <button class="btn btn-warning"
+                    [class.button-hidden]="!util.canRate(rating)"
+                    (click)="rate(rating)">採</button>
+                <button class="btn btn-primary"
+                    [class.button-hidden]="!util.canSuccess(rating)"
+                    (click)="success(rating)">合</button>
+                <button class="btn btn-danger"
+                    [class.button-hidden]="!util.canFail(rating)"
+                    (click)="fail(rating)">不</button>
+                <button class="btn btn-info"
+                    [class.button-hidden]="!util.canShowDetail(rating)"
+                    (click)="showDetail(rating)">詳細</button>
+                <button class="btn btn-secondary"
+                    [class.button-hidden]="!util.canDecline(rating)"
+                    (click)="delete(rating)">削</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

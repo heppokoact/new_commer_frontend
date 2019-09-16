@@ -1,0 +1,11 @@
+<!-- tooltipにbrのようなHTMLタグを出力させたい場合、このようにng-template経由で渡す必要がある -->
+<ng-template #tooltipTemplate>
+    <span [innerHTML]="'# ' + newCommer.name + ' #<br/>' + unit.majorName + ' ' + unit.minorName"></span>
+</ng-template>
+
+<button [class]="'btn btn-sm btn-' + getRatingClass()"
+    (click)="showEditRatingModal()"
+    [tooltip]="tooltipTemplate">
+    {{rating.shortName}}
+    <span class="request-count" *ngIf="rating.statusId != RatingStatus.NONE">{{rating.requestCount}}</span>
+</button>

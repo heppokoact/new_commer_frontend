@@ -1,0 +1,77 @@
+<div>
+    <edit-rating #editRating [general]="this"></edit-rating>
+    <general-config #generalConfig></general-config>
+
+    <table class="general-table">
+        <thead>
+            <tr class="major-header">
+                <th colspan="2" style="vertical-align: middle;">
+                    <label class="config-button"
+                        (click)="generalConfig.show()">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </label>
+                </th>
+                <ng-container *ngFor="let major of majors">
+                    <ng-container *ngIf="major.display">
+                        <th [attr.colspan]="major.count + 1">{{major.name}}</th>
+                    </ng-container>
+                </ng-container>
+            </tr>
+            <tr class="minor-header">
+                <th class="minor-header-othres"
+                    style="min-width: 4em; max-width: 4em;">社員No</th>
+                <th class="minor-header-othres"
+                    style="min-width: 7em; max-width: 7em;">氏名</th>
+                <ng-container *ngFor="let major of majors">
+                    <ng-container *ngIf="major.display">
+                        <ng-container *ngFor="let unit of major.minors">
+                            <th class="minor-name-cell">
+                                <p class="writing-mode-vertical">
+                                    <a routerLink="/requested"
+                                        class="dark-link"
+                                        [queryParams]="util.buildUnitParams(unit.majorName, unit.minorName)">
+                                        {{unit.minorName}}
+                                    </a>
+                                </p>
+                            </th>
+                        </ng-container>
+                        <th><p class="writing-mode-vertical">YP</p></th>
+                    </ng-container>
+                </ng-container>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let newCommer of newCommers">
+                <td>
+                    <a routerLink="/requested"
+                        class="dark-link"
+                        [queryParams]="util.buildNewCommerParams(newCommer.no)">
+                        {{newCommer.no}}
+                    </a>
+                </td>
+                <td>
+                    <a routerLink="/requested"
+                        class="dark-link"
+                        [queryParams]="util.buildNewCommerParams(newCommer.no)">
+                        {{newCommer.name}}
+                    </a>
+                </td>
+                <ng-container *ngFor="let major of majors">
+                    <ng-container *ngIf="major.display">
+                        <ng-container *ngFor="let unit of major.minors">
+                            <td>
+                                <rating-button [newCommer]="newCommer"
+                                    [unit]="unit" 
+                                    [rating]="getRatings(newCommer, unit)"
+                                    [editRating]="editRating"></rating-button>
+                            </td>
+                        </ng-container>
+                        <td class="yp-cell">{{getYp(major.name, newCommer.no)}}</td>
+                    </ng-container>
+                </ng-container>
+            </tr>
+        </tbody>
+    </table>
+    
+</div>
+
